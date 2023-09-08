@@ -97,14 +97,14 @@ function lsp_on_attach.on_attach(event)
 
 	-- Set up a document symbol mapping if the mapping is not already bound (by e.g. fzf-lua)
 	if vim.fn.maparg("<c-s>", "n") == "" then
-		map.n("<c-s>", lsp_methods.document_symbol, with_desc("Show document symbol"))
+		map.n("<c-s>", lsp_methods.document_symbol, map.with_desc("Show document symbol"))
 	end
 
 	local lsp_method = "textDocument/definition"
 	local selector = "quickfix"
 
 	-- Enable completion triggered by <c-x><c-o>
-	map.n("gd", lsp_methods.definition, with_desc("Jump to definition under cursor"))
+	map.n("gd", lsp_methods.definition, map.with_desc("Jump to definition under cursor"))
 	map.leader(
 		"n",
 		"as",
