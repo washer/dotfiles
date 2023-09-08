@@ -8,7 +8,7 @@ local modes = { "n", "i", "c", "v", "x", "s", "o", "t", "l" }
 map.default_options = { noremap = true, silent = true }
 
 function map.with_desc(desc)
-	return map.with_default_options({ buffer = buffer, desc = desc })
+	return map.with_default_options({ buffer = 0, desc = desc })
 end
 
 ---@param opts1 table

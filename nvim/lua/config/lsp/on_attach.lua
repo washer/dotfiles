@@ -95,10 +95,6 @@ function lsp_on_attach.on_attach(event)
 		vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
 	end
 
-	local function with_desc(desc)
-		return map.with_default_options({ buffer = buffer, desc = desc })
-	end
-
 	-- Set up a document symbol mapping if the mapping is not already bound (by e.g. fzf-lua)
 	if vim.fn.maparg("<c-s>", "n") == "" then
 		map.n("<c-s>", lsp_methods.document_symbol, with_desc("Show document symbol"))
@@ -113,13 +109,13 @@ function lsp_on_attach.on_attach(event)
 		"n",
 		"as",
 		lsp_request_jump(lsp_method, "split", selector),
-		with_desc("Jump to definition in a horizontal split")
+		map.with_desc("Jump to definition in a horizontal split")
 	)
 	map.leader(
 		"n",
 		"av",
 		lsp_request_jump(lsp_method, "vsplit", selector),
-		with_desc("Jump to definition in a vertical split")
+		map.with_desc("Jump to definition in a vertical split")
 	)
 end
 
