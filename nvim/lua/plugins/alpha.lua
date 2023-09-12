@@ -48,7 +48,8 @@ return {
 		local width = 46
 		local height = 25
 
-		dashboard.section.header.val = vim.split(logo .. "\n" .. greeting, "\n")
+		-- dashboard.section.header.val = vim.split(logo .. "\n" .. greeting, "\n")
+		dashboard.section.header.val = greeting
 		dashboard.section.header.opts.hl = "DashboardHeader"
 		dashboard.section.header.opts.position = "center"
 		dashboard.section.terminal.command = "cat | ~/.config/nvim/lua/art/thisisfine.sh"
