@@ -13,21 +13,19 @@ return {
 			require("neotest").setup({
 				adapters = {
 					require("neotest-jest")({
-						-- jestCommand = "npm test --",
 						jestConfig = "jest --watch ",
-						-- jestConfigFile = "custom.jest.config.ts",
-						env = { CI = true },
-						cwd = function(path)
-							return vim.fn.getcwd()
-						end,
 					}),
 				},
 				consumers = {
-					overseer = require("neotest.consumers.overseer"),
+					-- overseer = require("neotest.consumers.overseer"),
+					watch,
+					summary,
+					diagnostic,
 				},
 			})
 			map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
 			map.leader("n", "tn", '<cmd>lua require("neotest").run.run()<cr>')
+			map.leader("n", "tw", '<cmd>lua require("neotest").watch()<cr>')
 		end,
 	},
 }
