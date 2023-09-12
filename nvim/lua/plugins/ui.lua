@@ -41,6 +41,7 @@ return {
 				String = "󰀬",
 				TypeParameter = "󰊄",
 				Unit = "",
+				Copilot = "",
 			},
 			menu = {},
 		},
@@ -136,4 +137,5 @@ return {
 			require("bufferline").setup({})
 		end,
 	},
+	"RRethy/vim-illuminate",
 }
