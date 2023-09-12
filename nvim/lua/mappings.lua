@@ -6,12 +6,15 @@ keymap.set("n", "<Leader>q", "<cmd>q<cr>", { silent = true })
 keymap.set("n", "<Leader>c", "<cmd>bd<cr>", { silent = true })
 
 -- Plugins
+--
+-- Lazy
+map.leader("n", "pl", "<cmd>Lazy<cr>")
 
 -- Telescope
 keymap.set("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", { silent = true })
 keymap.set("n", "<Leader>fw", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { silent = true })
 keymap.set("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", { silent = true })
-keymap.set("n", "<Leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>", { silent = true })
+keymap.set("n", "<Leader>fm", "<cmd>lua require('telescope.builtin').help_tags()<cr>", { silent = true })
 
 keymap.set("n", "<Leader>fn", "<cmd>lua require('telescope').extensions.notify.notify(<opts>)<cr>", { silent = true })
 

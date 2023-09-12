@@ -47,8 +47,10 @@ return {
 		local greeting = getGreeting(userName)
 		local width = 46
 		local height = 25
+
 		dashboard.section.header.val = vim.split(logo .. "\n" .. greeting, "\n")
 		dashboard.section.header.opts.hl = "DashboardHeader"
+		dashboard.section.header.opts.position = "center"
 		dashboard.section.terminal.command = "cat | ~/.config/nvim/lua/art/thisisfine.sh"
 		dashboard.section.terminal.width = width
 		dashboard.section.terminal.height = height
@@ -79,16 +81,5 @@ return {
 	end,
 	config = function(_, opts)
 		require("alpha").setup(opts.config)
-		-- vim.api.nvim_create_autocmd("User", {
-		-- 	pattern = "LazyVimStarted",
-		-- 	desc = "Add Alpha dashboard footer",
-		-- 	once = true,
-		-- 	callback = function()
-		-- 		local stats = require("lazy").stats()
-		-- 		local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
-		-- 		opts.section.footer.val = { stats.count .. " plugins  loaded in " .. ms .. "ms" }
-		-- 		pcall(vim.cmd.AlphaRedraw)
-		-- 	end,
-		-- })
 	end,
 }
