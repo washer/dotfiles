@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+local map = require("config.map")
 
 keymap.set("n", "<Leader>w", "<cmd>w<cr>", { silent = true })
 keymap.set("n", "<Leader>q", "<cmd>q<cr>", { silent = true })
@@ -14,8 +15,8 @@ keymap.set("n", "<Leader>fm", "<cmd>lua require('telescope.builtin').man_pages()
 
 keymap.set("n", "<Leader>fn", "<cmd>lua require('telescope').extensions.notify.notify(<opts>)<cr>", { silent = true })
 
--- NeoTree
-keymap.set("n", "<Leader>e", "<cmd>Neotree toggle<cr>", { silent = true })
+-- NvimTree
+keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
 -- Comment
 keymap.set(
