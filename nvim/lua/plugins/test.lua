@@ -22,9 +22,12 @@ return {
 						end,
 					}),
 				},
+				consumers = {
+					overseer = require("neotest.consumers.overseer"),
+				},
 			})
 			map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
-			map.leader("n", "tn", '<cmd>lua <require("neotest").run.run()cr>')
+			map.leader("n", "tn", '<cmd>lua require("neotest").run.run()<cr>')
 		end,
 	},
 }
