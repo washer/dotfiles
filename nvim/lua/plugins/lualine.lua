@@ -1,3 +1,5 @@
+local git_blame = require("gitblame")
+
 return {
 	{
 		"tpope/vim-fugitive",
@@ -11,7 +13,9 @@ return {
 				require("lualine").setup({
 					sections = {
 						lualine_x = { "overseer" },
-						lualine_z = { "fugitive" },
+						lualine_c = {
+							{ git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+						},
 					},
 				})
 			end,
