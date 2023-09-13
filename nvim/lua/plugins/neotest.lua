@@ -11,6 +11,7 @@ return {
 		},
 		config = function()
 			require("neotest").setup({
+				lazy = false,
 				adapters = {
 					require("neotest-jest")({
 						jestConfig = "jest --watch ",

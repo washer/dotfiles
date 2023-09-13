@@ -1,6 +1,9 @@
 return {
 	"nvim-lua/plenary.nvim",
-	"folke/neodev.nvim",
+	{
+		"folke/neodev.nvim",
+		library = { plugins = { "nvim-dap-ui" }, types = true },
+	},
 	"MisanthropicBit/decipher.nvim",
 	"numToStr/Comment.nvim",
 	{

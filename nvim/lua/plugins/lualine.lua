@@ -8,9 +8,9 @@ return {
 			dependencies = {
 				"nvim-tree/nvim-web-devicons",
 			},
-			options = { theme = "everforest" },
 			config = function(_, opts)
 				require("lualine").setup({
+					options = { theme = "everforest", extensions = { "nvim-dap-ui" } },
 					sections = {
 						lualine_c = {
 							{ git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
