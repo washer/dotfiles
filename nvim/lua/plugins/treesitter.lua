@@ -35,6 +35,8 @@ return {
 				"bash",
 				"html",
 				"json",
+				"markdown",
+				"markdown_inline",
 			},
 		},
 	},

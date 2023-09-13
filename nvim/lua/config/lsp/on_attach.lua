@@ -33,11 +33,10 @@ if has_lspsaga then
 	local function lspsaga_cmd(command)
 		return ("<cmd>Lspsaga %s<cr>"):format(command)
 	end
-
-	-- vim.lsp.buf.hover() = lspsaga_cmd("hover_doc")
-	-- vim.lsp.buf.code_action() = lspsaga_cmd("code_action")
-	-- vim.lsp.buf.rename( = lspsaga_cmd("rename")
-	-- vim.lsp.buf.references() = lspsaga_cmd("lsp_references")
+	lsp_methods.hover = lspsaga_cmd("hover_doc")
+	lsp_methods.code_action = lspsaga_cmd("code_action")
+	lsp_methods.rename = lspsaga_cmd("rename")
+	lsp_methods.references = lspsaga_cmd("lsp_references")
 end
 
 ---Jump to an lsp result in a split window or select between results if there
@@ -74,14 +73,8 @@ local function lsp_request_jump(lsp_method, split_cmd, selector)
 					vim.list_extend(locations, items)
 				end
 
-				local has_fzf_lua, _ = pcall(require, "fzf-lua")
-
-				if selector == "fzf" and has_fzf_lua then
-					fzf_lua_lsp_jump_selector(locations)
-				else
-					vim.fn.setqflist({}, " ", { items = locations })
-					vim.cmd("copen")
-				end
+				vim.fn.setqflist({}, " ", { items = locations })
+				vim.cmd("copen")
 			end
 		end)
 	end

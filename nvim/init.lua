@@ -93,3 +93,4 @@ vim.opt.incsearch = true -- update results while I type
 require("mappings")
 require("config.lsp")
 require("config.dap")
+require("config.diagnostic")
