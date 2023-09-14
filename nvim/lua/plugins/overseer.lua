@@ -1,5 +1,4 @@
 local map = require("config.map")
-local wk = require("which-key")
 
 return {
 	{
@@ -18,9 +17,6 @@ return {
 				},
 			})
 
-			wk.register({
-				["<leader>o"] = { name = "Overseer" },
-			})
 			map.leader("n", "ot", "<cmd>OverseerToggle<cr>", "Toggle Overseer")
 			map.leader("n", "or", "<cmd>OverseerRun<cr>", "Run command with Overseer")
 		end,

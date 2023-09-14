@@ -8,12 +8,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
-			local wk = require("which-key")
 			vim.g.barbar_auto_setup = false
-			wk.register({
-				["<leader>b"] = { name = "Buffers" },
-				["<leader>bc"] = { name = "Close buffers" },
-			})
 
 			map.leader("n", "bco", "<cmd>BufferCloseAllButCurrent<cr>", "Close other buffers")
 			map.leader("n", "bcl", "<cmd>BufferCloseBuffersRight<cr>", "Close buffers to the right")
