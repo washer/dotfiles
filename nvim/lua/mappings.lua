@@ -1,8 +1,8 @@
 local map = require("config.map")
 
-map.leader("n", "w", "<cmd>w<cr>", "save buffer")
-map.leader("n", "q", "<cmd>q<cr>", "quit window")
-map.leader("n", "c", "<cmd>bd<cr>", "close buffer")
+map.leader("n", "w", "<cmd>w<cr>", "Save buffer")
+map.leader("n", "q", "<cmd>q<cr>", "Quit window")
+map.leader("n", "c", "<cmd>bd<cr>", "Close buffer")
 
 -- Plugins
 --

@@ -19,15 +19,15 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 	}
 end
 
-map.leader("n", "db", dap.toggle_breakpoint)
-map.leader("n", "dd", dap.clear_breakpoints)
-map.leader("n", "dc", dap.continue)
-map.leader("n", "do", dap.step_over)
-map.leader("n", "di", dap.step_into)
-map.leader("n", "du", dap.step_out)
-map.leader("n", "dr", dap.repl.open)
-map.leader("n", "ds", dap.terminate)
-map.leader("n", "dt", '<cmd>lua require("dapui").toggle()<cr>')
+map.leader("n", "db", dap.toggle_breakpoint, "Toggle breakpoint")
+map.leader("n", "dd", dap.clear_breakpoints, "Clear breakpoints")
+map.leader("n", "dc", dap.continue, "Continue")
+map.leader("n", "do", dap.step_over, "Step over")
+map.leader("n", "di", dap.step_into, "Step into")
+map.leader("n", "du", dap.step_out, "Step out")
+map.leader("n", "dr", dap.repl.open, "Open REPL")
+map.leader("n", "ds", dap.terminate, "Terminate")
+map.leader("n", "dt", '<cmd>lua require("dapui").toggle()<cr>', "Toggle UI")
 
 require("dap-vscode-js").setup({
 	debugger_path = vim.fn.expand("~/vscode-js-debug"),
