@@ -9,9 +9,21 @@ vim.g.use_custom_notifier = true
 
 require("mappings")
 
+-- We don't want tsserver to format stuff as the default formatting doesn't
+-- seem to respect project-local settings for eslint and prettier. Instead, we
+-- implicitly rely on null-ls formatting
+local function lsp_format_wrapper()
+	vim.lsp.buf.format({
+		filter = function(client)
+			return client.name ~= "tsserver"
+		end,
+	})
+end
+
 -- autocmds
--- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	callback = lsp_format_wrapper,
+})
 
 -- Plugins
 vim.loader.enable() -- cache lua modules (https://github.com/neovim/neovim/pull/22668)

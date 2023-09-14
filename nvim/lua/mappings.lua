@@ -1,9 +1,8 @@
-local keymap = vim.keymap
 local map = require("config.map")
 
-keymap.set("n", "<Leader>w", "<cmd>w<cr>", { silent = true })
-keymap.set("n", "<Leader>q", "<cmd>q<cr>", { silent = true })
-keymap.set("n", "<Leader>c", "<cmd>bd<cr>", { silent = true })
+map.leader("n", "w", "<cmd>w<cr>", "save buffer")
+map.leader("n", "q", "<cmd>q<cr>", "quit window")
+map.leader("n", "c", "<cmd>bd<cr>", "close buffer")
 
 -- Plugins
 --
@@ -11,32 +10,31 @@ keymap.set("n", "<Leader>c", "<cmd>bd<cr>", { silent = true })
 map.leader("n", "pl", "<cmd>Lazy<cr>")
 
 -- Telescope
-keymap.set("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", { silent = true })
-keymap.set("n", "<Leader>fw", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { silent = true })
-keymap.set("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", { silent = true })
-keymap.set("n", "<Leader>fm", "<cmd>lua require('telescope.builtin').help_tags()<cr>", { silent = true })
-
-keymap.set("n", "<Leader>fn", "<cmd>lua require('telescope').extensions.notify.notify(<opts>)<cr>", { silent = true })
+map.leader("n", "ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files")
+map.leader("n", "fw", "<cmd>lua require('telescope.builtin').live_grep({})<cr>", "Live grep")
+map.leader("n", "fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", "Find buffers")
+map.leader("n", "fm", "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Man pages")
+map.leader(
+	"n",
+	"fd",
+	"<cmd>lua require('telescope.builtin').live_grep({search_dirs = { vim.fn.expand('%:p:h') },})<cr>",
+	"Find in current directory"
+)
 
 -- NvimTree
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+map.leader("n", "e", "<cmd>NvimTreeFindFileToggle<cr>", "File tree")
 
 -- Comment
-keymap.set(
+map.leader(
 	"n",
-	"<Leader>/",
+	"/",
 	"<cmd>lua require('Comment.api').toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)<cr>",
-	{ silent = true }
+	"Toggle comment"
 )
-keymap.set(
-	"v",
-	"<Leader>/",
-	"<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-	{ silent = true }
-)
+map.leader("v", "/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", "Toggle comment")
 
 -- Mason
-keymap.set("n", "<Leader>pm", "<cmd>Mason<cr>", { silent = true })
+map.leader("n", "pm", "<cmd>Mason<cr>")
 
 -- Lazy git
-keymap.set("n", "<Leader>gg", "<cmd>lua require('lazygit').lazygit()<cr>", { silent = true })
+map.leader("n", "gg", "<cmd>lua require('lazygit').lazygit()<cr>", "Lazy Git")
