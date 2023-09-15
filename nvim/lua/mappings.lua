@@ -3,14 +3,20 @@ local map = require("config.map")
 map.leader("n", "w", "<cmd>w<cr>", "Save buffer")
 map.leader("n", "q", "<cmd>q<cr>", "Quit window")
 map.leader("n", "c", "<cmd>bd<cr>", "Close buffer")
+map.leader("n", "R", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
 
 -- Plugins
---
 -- Lazy
 map.leader("n", "pl", "<cmd>Lazy<cr>")
 
 -- Telescope
 map.leader("n", "ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files")
+map.leader(
+	"n",
+	"fh",
+	"<cmd>lua require('telescope.builtin').find_files({hidden = true, no_ignore = true})<cr>",
+	"Find files"
+)
 map.leader("n", "fw", "<cmd>lua require('telescope.builtin').live_grep({})<cr>", "Live grep")
 map.leader("n", "fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", "Find buffers")
 map.leader("n", "fm", "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Man pages")
@@ -20,6 +26,7 @@ map.leader(
 	"<cmd>lua require('telescope.builtin').live_grep({search_dirs = { vim.fn.expand('%:p:h') },})<cr>",
 	"Find in current directory"
 )
+map.leader("n", "fc", "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "Colorschemes")
 
 -- NvimTree
 map.leader("n", "e", "<cmd>NvimTreeFindFileToggle<cr>", "File tree")

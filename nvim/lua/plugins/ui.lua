@@ -1,5 +1,6 @@
+local map = require("config.map")
+
 return {
-	"neanias/everforest-nvim",
 	{
 		"nvim-tree/nvim-web-devicons",
 		enabled = vim.g.icons_enabled,
@@ -130,4 +131,16 @@ return {
 		end,
 	},
 	"RRethy/vim-illuminate",
+	{
+		"ziontee113/icon-picker.nvim",
+		dependencies = {
+			"stevearc/dressing.nvim",
+		},
+		config = function()
+			require("icon-picker").setup({
+				disable_legacy_commands = true,
+			})
+		end,
+		map.leader("n", "]", "<cmd>IconPickerNormal<cr>"),
+	},
 }

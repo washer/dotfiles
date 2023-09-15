@@ -48,7 +48,7 @@ require("lazy").setup("plugins", {
 })
 
 -- Theme
-vim.cmd([[colorscheme everforest]])
+vim.cmd([[colorscheme nordic]])
 
 -- Behaviors
 vim.opt.belloff = "all"
