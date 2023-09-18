@@ -42,6 +42,3 @@ map.leader("v", "/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.f
 
 -- Mason
 map.leader("n", "pm", "<cmd>Mason<cr>")
-
--- Lazy git
-map.leader("n", "gg", "<cmd>lua require('lazygit').lazygit()<cr>", "Lazy Git")

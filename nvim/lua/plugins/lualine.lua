@@ -1,5 +1,9 @@
 local git_blame = require("gitblame")
 
+local function executor()
+	return require("executor").statusline()
+end
+
 return {
 	{
 		"tpope/vim-fugitive",
@@ -21,7 +25,13 @@ return {
 								path = 1,
 							},
 						},
-						lualine_y = { "overseer" },
+						lualine_y = {
+							"filetype",
+							"progress",
+						},
+						lualine_z = {
+							executor,
+						},
 					},
 				})
 			end,

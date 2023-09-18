@@ -141,6 +141,6 @@ return {
 				disable_legacy_commands = true,
 			})
 		end,
-		map.leader("n", "]", "<cmd>IconPickerNormal<cr>"),
+		map.leader("n", "]", "<cmd>IconPickerNormal<cr>", "Pick icon"),
 	},
 }

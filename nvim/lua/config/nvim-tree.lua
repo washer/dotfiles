@@ -1,10 +1,8 @@
 return function()
-	vim.cmd([[
-      nnoremap - :NvimTreeToggle<CR>
-      ]])
+	vim.cmd([[nnoremap - :NvimTreeToggle<CR>]])
 
-	vim.g.loaded_netrw = 1
-	vim.g.loaded_netrwPlugin = 1
+	-- vim.g.loaded_netrw = 1
+	-- vim.g.loaded_netrwPlugin = 1
 
 	vim.opt.termguicolors = true
 
@@ -12,8 +10,8 @@ return function()
 	local WIDTH_RATIO = 0.5 -- You can change this too
 
 	require("nvim-tree").setup({
-		disable_netrw = true,
-		hijack_netrw = true,
+		disable_netrw = false,
+		hijack_netrw = false,
 		respect_buf_cwd = true,
 		sync_root_with_cwd = true,
 		view = {

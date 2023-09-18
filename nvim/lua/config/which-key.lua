@@ -12,4 +12,6 @@ wk.register({
 	["<leader>l"] = { name = "Diagnostics" },
 	["<leader>g"] = { name = "Git" },
 	["<leader>a"] = { name = "Jump to definition" },
+	["<leader>o"] = { name = "Orgmode" },
+	["<leader>x"] = { name = "Trouble" },
 })

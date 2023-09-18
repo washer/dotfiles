@@ -1,9 +1,27 @@
 return {
-	"AlexvZyl/nordic.nvim",
+	{
+		"AlexvZyl/nordic.nvim",
+		config = function()
+			require("nordic").setup({
+				leap = {
+					-- Dims the backdrop when using leap.
+					dim_backdrop = true,
+				},
+			})
+		end,
+	},
 	"neanias/everforest-nvim",
 	{ "Everblush/nvim", name = "everblush" },
 	"titanzero/zephyrium",
 	"ribru17/bamboo.nvim",
-	"folke/tokyonight.nvim",
+	{
+		"folke/tokyonight.nvim",
+		config = function()
+			require("tokyonight").setup({
+				style = "storm",
+				light_style = "day",
+			})
+		end,
+	},
 	"theniceboy/nvim-deus",
 }
