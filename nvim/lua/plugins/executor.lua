@@ -13,6 +13,9 @@ return {
 					["api"] = {
 						"npm run test && npm run test-integration && npm run build && npm run lint",
 						"npm run test-integration",
+					},
+					[""] = {
+						"npm run test && npm run build && npm run lint",
 						"npm run test",
 						"npm run build",
 						"npm run lint",

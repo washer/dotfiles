@@ -98,7 +98,6 @@ vim.opt.laststatus = 3 -- single global statusline
 vim.opt.wildmenu = true -- tab complete on command line
 vim.opt.ignorecase = true -- case insensitive search...
 vim.opt.smartcase = true -- unless I use caps
-vim.opt.hlsearch = true -- highlight matching text
 
 vim.opt.incsearch = true -- update results while I type
 
