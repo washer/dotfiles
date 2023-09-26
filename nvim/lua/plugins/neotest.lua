@@ -12,6 +12,14 @@ return {
 		config = function()
 			require("neotest").setup({
 				lazy = false,
+				icons = {
+					failed = "x",
+					passed = "✓",
+					running = "",
+					skipped = "",
+					unknown = "?",
+					watching = "👀",
+				},
 				adapters = {
 					require("neotest-jest")({
 						jestConfig = "jest --watch ",

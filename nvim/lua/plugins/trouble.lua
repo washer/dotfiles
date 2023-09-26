@@ -4,6 +4,13 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+
+		config = function()
+			require("trouble").setup({
+				height = 30,
+			})
+		end,
+
 		map.leader("n", "xx", function()
 			require("trouble").open()
 		end, "List"),

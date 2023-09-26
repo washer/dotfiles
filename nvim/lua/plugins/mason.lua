@@ -13,7 +13,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		-- overrides `require("mason-lspconfig").setup(...)`
 		opts = {
-			ensure_installed = { "jsonls", "tsserver", "rust_analyzer" },
+			ensure_installed = { "jsonls", "tsserver", "rust_analyzer", "sqlls" },
 		},
 	},
 	-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
@@ -21,7 +21,7 @@ return {
 		"jay-babu/mason-null-ls.nvim",
 		-- overrides `require("mason-null-ls").setup(...)`
 		opts = {
-			ensure_installed = { "eslint_d", "fixjson", "rustfmt" },
+			ensure_installed = { "eslint_d", "fixjson", "rustfmt", "sql-formatter" },
 			set,
 		},
 	},
