@@ -101,6 +101,7 @@ function lsp_on_attach.on_attach(event)
 	map.n("gd", lsp_methods.definition, "Jump to definition under cursor")
 	map.leader("n", "as", lsp_request_jump(lsp_method, "split", selector), "Jump to definition in a horizontal split")
 	map.leader("n", "av", lsp_request_jump(lsp_method, "vsplit", selector), "Jump to definition in a vertical split")
+	map.leader("n", "aa", lsp_methods.code_action, "Code action")
 end
 
 return lsp_on_attach
