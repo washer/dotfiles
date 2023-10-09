@@ -6,8 +6,12 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 
 		config = function()
+			local HEIGHT_RATIO = 0.2
+			local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+			local window_h = screen_h * HEIGHT_RATIO
+			local window_h_int = math.floor(window_h)
 			require("trouble").setup({
-				height = 30,
+				height = window_h_int,
 			})
 		end,
 

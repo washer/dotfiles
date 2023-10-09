@@ -14,4 +14,5 @@ wk.register({
 	["<leader>a"] = { name = "Jump to definition" },
 	["<leader>o"] = { name = "Orgmode" },
 	["<leader>x"] = { name = "Trouble" },
+	["<leader>m"] = { name = "Markdown" },
 })

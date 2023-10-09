@@ -24,4 +24,5 @@ return {
 		end,
 	},
 	"theniceboy/nvim-deus",
+	"ful1e5/onedark.nvim",
 }

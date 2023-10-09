@@ -28,7 +28,14 @@ return {
 			})
 			map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "Run tests in file")
 			map.leader("n", "tn", '<cmd>lua require("neotest").run.run()<cr>', "Run nearest test")
-			map.leader("n", "tw", '<cmd>lua require("neotest").watch()<cr>', "Watch tests")
+			map.leader(
+				"n",
+				"twf",
+				'<cmd>lua require("neotest").watch.watch(vim.fn.expand("%"))<cr>',
+				"Watch tests in file"
+			)
+			map.leader("n", "twn", '<cmd>lua require("neotest").watch.watch()<cr>', "Watch nearest test")
+			map.leader("n", "tws", '<cmd>lua require("neotest").watch.stop()<cr>', "Stop watching all tests")
 			map.leader("n", "ts", '<cmd>lua require("neotest").summary.toggle()<CR>', "Toggle summary")
 			map.leader("n", "to", '<cmd>lua require("neotest").output.open({ enter = true })<CR>', "Open test output")
 		end,
