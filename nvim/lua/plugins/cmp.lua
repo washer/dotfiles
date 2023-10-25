@@ -12,6 +12,7 @@ return {
 		},
 		config = require("config.luasnip"),
 	},
+	{ "Gelio/cmp-natdat", config = true },
 	{
 		"hrsh7th/nvim-cmp",
 		commit = "a9c701fa7e12e9257b3162000e5288a75d280c28", -- https://github.com/hrsh7th/nvim-cmp/issues/1382
@@ -48,8 +49,8 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" }, -- For luasnip users.
-				}, {
 					{ name = "buffer" },
+					{ name = "natdat" },
 				}),
 				experimental = {
 					ghost_text = true,

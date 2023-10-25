@@ -1,3 +1,5 @@
+local map = require("config.map")
+
 return {
 	{
 		"ggandor/leap.nvim",
@@ -5,7 +7,8 @@ return {
 			"tpope/vim-repeat",
 		},
 		config = function()
-			require("leap").add_default_mappings()
+			map.set("n", "s", "<Plug>(leap-forward-to)")
+			map.set("n", "S", "<Plug>(leap-backward-to)")
 		end,
 	},
 }

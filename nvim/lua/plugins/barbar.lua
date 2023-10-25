@@ -29,8 +29,8 @@ return {
 				},
 				gitsigns = {
 					added = { enabled = true, icon = "洛" },
-					changed = { enabled = true, icon = "" },
-					deleted = { enabled = true, icon = "" },
+					changed = { enabled = true, icon = " " },
+					deleted = { enabled = true, icon = " " },
 				},
 			},
 		},

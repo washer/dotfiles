@@ -20,9 +20,11 @@ return {
 			vim.cmd(current_line() .. "GBrowse")
 		end, "Open current line in remote"),
 
-		map.leader("n", "gl", function()
+		map.leader("n", "gc", function()
 			vim.cmd(current_line() .. "GBrowse!")
 		end, "Copy current line in remote to clipboard"),
+
+		map.leader("n", "gl", "<cmd>Gclog<cr>", "Open git log"),
 	},
 	{
 		"f-person/git-blame.nvim",

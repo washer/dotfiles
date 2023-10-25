@@ -48,7 +48,7 @@ require("lazy").setup("plugins", {
 })
 
 -- Theme
-vim.cmd([[colorscheme nordic]])
+-- vim.cmd([[colorscheme kanagawa]])
 
 -- Behaviors
 vim.opt.belloff = "all"
