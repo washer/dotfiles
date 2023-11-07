@@ -1,8 +1,9 @@
 local map = require("config.map")
 local dap = require("dap")
 local dap_widgets = require("dap.ui.widgets")
+local dapui = require("dapui")
 
-require("dapui").setup()
+dapui.setup()
 
 for _, language in ipairs({ "typescript", "javascript" }) do
 	dap.configurations[language] = {
@@ -28,6 +29,9 @@ map.leader("n", "du", dap.step_out, "Step out")
 map.leader("n", "dr", dap.repl.open, "Open REPL")
 map.leader("n", "ds", dap.terminate, "Terminate")
 map.leader("n", "dt", '<cmd>lua require("dapui").toggle()<cr>', "Toggle UI")
+dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
 require("dap-vscode-js").setup({
 	debugger_path = vim.fn.expand("~/vscode-js-debug"),
