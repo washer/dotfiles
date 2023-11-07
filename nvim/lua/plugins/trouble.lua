@@ -30,5 +30,7 @@ return {
 		map.leader("n", "xl", function()
 			require("trouble").open("loclist")
 		end, "Loclist"),
+
+		map.leader("n", "xt", "<cmd>TodoTrouble<cr>", "Todos"),
 	},
 }

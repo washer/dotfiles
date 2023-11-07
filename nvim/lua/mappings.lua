@@ -27,6 +27,8 @@ map.leader(
 	"Find in current directory"
 )
 map.leader("n", "fc", "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "Colorschemes")
+map.leader("n", "fa", "<cmd>lua require('telescope').extensions.aerial.aerial()<cr>", "Aerial")
+map.leader("n", "ft", "<cmd>TodoTelescope<cr>", "Todos")
 
 -- NvimTree
 map.leader("n", "e", "<cmd>NvimTreeFindFileToggle<cr>", "File tree")

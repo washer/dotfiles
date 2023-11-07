@@ -2,6 +2,10 @@ local map = require("config.map")
 
 return {
 	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	{
 		"nvim-tree/nvim-web-devicons",
 		enabled = vim.g.icons_enabled,
 		opts = {

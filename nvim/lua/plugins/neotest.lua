@@ -20,6 +20,9 @@ return {
 					unknown = "?",
 					watching = "👀",
 				},
+				output = {
+					enabled = false,
+				},
 				adapters = {
 					require("neotest-jest")({
 						jestConfig = "jest --watch ",
