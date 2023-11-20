@@ -9,7 +9,9 @@ local map = require("config.map")
 
 return {
 	"stevearc/overseer.nvim",
-	opts = {},
+	opts = {
+		dap = true,
+	},
 	map.leader("n", "rr", "<cmd>OverseerRun<CR>", "Overseer run"),
 	map.leader("n", "rt", "<cmd>OverseerOpen<CR>", "Overseer open"),
 	map.leader("n", "rb", "<cmd>OverseerBuild<CR>", "Overseer build"),
