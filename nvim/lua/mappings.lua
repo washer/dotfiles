@@ -26,6 +26,24 @@ map.leader(
 	"<cmd>lua require('telescope.builtin').live_grep({search_dirs = { vim.fn.expand('%:p:h') },})<cr>",
 	"Find in current directory"
 )
+map.leader(
+	"n",
+	"fit",
+	"<cmd>lua require('telescope.builtin').live_grep({glob_pattern='*.{test,it}*'})<cr>",
+	"Find in test files"
+)
+map.leader(
+	"n",
+	"fii",
+	"<cmd>lua require('telescope.builtin').live_grep({glob_pattern='*.{it}*'})<cr>",
+	"Find in integration test files"
+)
+map.leader(
+	"n",
+	"fif",
+	"<cmd>lua require('telescope.builtin').live_grep({glob_pattern='!*.{test,it}*'})<cr>",
+	"Find in non-test files"
+)
 map.leader("n", "fc", "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "Colorschemes")
 map.leader("n", "fa", "<cmd>lua require('telescope').extensions.aerial.aerial()<cr>", "Aerial")
 map.leader("n", "ft", "<cmd>TodoTelescope<cr>", "Todos")
