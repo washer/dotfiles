@@ -15,7 +15,7 @@ map.leader(
 	"n",
 	"fh",
 	"<cmd>lua require('telescope.builtin').find_files({hidden = true, no_ignore = true})<cr>",
-	"Find files"
+	"Find including hidden files"
 )
 map.leader("n", "fw", "<cmd>lua require('telescope.builtin').live_grep({})<cr>", "Live grep")
 map.leader("n", "fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", "Find buffers")
