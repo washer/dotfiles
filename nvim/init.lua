@@ -9,22 +9,6 @@ vim.g.use_custom_notifier = true
 
 require("mappings")
 
--- We don't want tsserver to format stuff as the default formatting doesn't
--- seem to respect project-local settings for eslint and prettier. Instead, we
--- implicitly rely on null-ls formatting
-local function lsp_format_wrapper()
-	vim.lsp.buf.format({
-		filter = function(client)
-			return client.name ~= "tsserver"
-		end,
-	})
-end
-
--- autocmds
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	callback = lsp_format_wrapper,
-})
-
 -- Plugins
 vim.loader.enable() -- cache lua modules (https://github.com/neovim/neovim/pull/22668)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -46,6 +30,10 @@ require("lazy").setup("plugins", {
 		notify = false,
 	},
 })
+
+vim.api.nvim_create_user_command("Browse", function(opts)
+	vim.fn.system({ "open", opts.fargs[1] })
+end, { nargs = 1 })
 
 -- Theme
 -- vim.cmd([[colorscheme kanagawa]])

@@ -4,17 +4,6 @@ local map = require("config.map")
 ---@diagnostic disable-next-line: unused-local
 local has_lspsaga, lspsaga = pcall(require, "lspsaga")
 
--- We don't want tsserver to format stuff as the default formatting doesn't
--- seem to respect project-local settings for eslint and prettier. Instead, we
--- implicitly rely on null-ls formatting
-local function lsp_format_wrapper()
-	vim.lsp.buf.format({
-		filter = function(client)
-			return client.name ~= "tsserver"
-		end,
-	})
-end
-
 local lsp_methods = {
 	definition = vim.lsp.buf.definition,
 	declaration = vim.lsp.buf.declaration,
