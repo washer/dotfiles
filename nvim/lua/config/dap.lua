@@ -3,7 +3,7 @@ local dap = require("dap")
 local dap_widgets = require("dap.ui.widgets")
 local dapui = require("dapui")
 
-dapui.setup()
+dapui.setup({})
 
 for _, language in ipairs({ "typescript", "javascript" }) do
 	dap.configurations[language] = {

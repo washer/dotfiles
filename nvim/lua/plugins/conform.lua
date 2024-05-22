@@ -6,6 +6,7 @@ return {
 			lua = { "stylua" },
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
+			["*"] = { "codespell" },
 		},
 		format_on_save = {
 			-- These options will be passed to conform.format()

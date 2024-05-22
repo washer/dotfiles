@@ -62,4 +62,5 @@ return {
 			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 	},
+	"dmmulroy/ts-error-translator.nvim",
 }

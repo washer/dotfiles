@@ -4,5 +4,5 @@ return {
 		"mxsdev/nvim-dap-vscode-js",
 		lazy = false,
 	},
-	"rcarriga/nvim-dap-ui",
+	{ "rcarriga/nvim-dap-ui", lazy = false },
 }

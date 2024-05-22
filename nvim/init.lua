@@ -37,6 +37,7 @@ end, { nargs = 1 })
 
 -- Theme
 -- vim.cmd([[colorscheme kanagawa]])
+vim.cmd([[colorscheme cyberdream]])
 
 -- Behaviors
 vim.opt.belloff = "all"
