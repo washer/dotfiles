@@ -30,6 +30,11 @@ return {
 				},
 			})
 			map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "Run tests in file")
+			map.leader("n", "tt", function()
+				-- Toggle trouble and test summary
+				require("trouble").toggle()
+				require("neotest").summary.toggle()
+			end, "Toggle test UI")
 			map.leader("n", "tn", '<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>', "Run nearest test")
 			map.leader(
 				"n",

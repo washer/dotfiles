@@ -29,11 +29,18 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
+			local colors = require("cyberdream.colors").default
 			require("cyberdream").setup({
 				transparent = true,
 				italic_comments = true,
 				hide_fillchars = true,
 				borderless_telescope = false,
+				theme = {
+					highlights = {
+						-- Identifier = { fg = colors.red },
+						Identifier = { fg = colors.orange },
+					},
+				},
 			})
 		end,
 	},
