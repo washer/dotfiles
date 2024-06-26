@@ -62,3 +62,7 @@ map.leader("v", "/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.f
 
 -- Mason
 map.leader("n", "pm", "<cmd>Mason<cr>")
+
+-- Nowplaying
+map.leader("n", "Ml", "<cmd>lua require('tools.nowplaying').nextSong()<cr>", "Next song")
+map.leader("n", "Mh", "<cmd>lua require('tools.nowplaying').previousSong()<cr>", "Previous song")

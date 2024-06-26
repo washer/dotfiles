@@ -16,4 +16,5 @@ wk.register({
 	["<leader>o"] = { name = "Orgmode" },
 	["<leader>x"] = { name = "Trouble" },
 	["<leader>m"] = { name = "Markdown" },
+	["<leader>M"] = { name = "Music" },
 })

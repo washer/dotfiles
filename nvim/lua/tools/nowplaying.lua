@@ -1,10 +1,11 @@
-local async = require("plenary.async")
 local Job = require("plenary.job")
 
 local current_song = ""
 local current_artist = ""
 
 local M = {}
+
+-- TODO: Add a check for whether the nowplaying-cli binary is installed and fail gracefully and vim.notify if not
 
 local function start_artist_job()
 	Job:new({
@@ -38,6 +39,20 @@ end
 
 function M.getCurrentlyPlaying()
 	return current_artist .. " - " .. current_title
+end
+
+function M.nextSong()
+	Job:new({
+		command = "nowplaying-cli",
+		args = { "next" },
+	}):start()
+end
+
+function M.previousSong()
+	Job:new({
+		command = "nowplaying-cli",
+		args = { "previous" },
+	}):start()
 end
 
 start_artist_job()
