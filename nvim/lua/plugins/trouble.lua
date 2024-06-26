@@ -21,7 +21,7 @@ return {
 		end, "List"),
 
 		map.leader("n", "xd", function()
-			require("trouble").open("document_diagnostics")
+			require("trouble").open("diagnostics")
 		end, "Document diagnostics"),
 
 		map.leader("n", "xq", function()

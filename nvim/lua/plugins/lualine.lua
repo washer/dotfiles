@@ -1,4 +1,5 @@
 local git_blame = require("gitblame")
+local nowplaying = require("tools.nowplaying")
 
 local function executor()
 	return require("executor").statusline()
@@ -39,7 +40,7 @@ return {
 							"progress",
 						},
 						lualine_z = {
-							executor,
+							nowplaying.getCurrentlyPlaying,
 						},
 					},
 				})

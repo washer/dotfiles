@@ -5,18 +5,16 @@ return {
 		event = "InsertEnter",
 		config = function()
 			require("copilot").setup({
-				suggestion = {
-					keymap = {
-						accept = "<C-k>",
-						accept_word = false,
-						accept_line = false,
-						next = "<C-h>",
-						prev = "<C-l>",
-						dismiss = "<C-j>",
-					},
-				},
+
+				suggestion = { enabled = false },
 				panel = { enabled = false },
 			})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	},
 }
