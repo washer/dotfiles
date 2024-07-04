@@ -38,7 +38,7 @@ local function update_song_duration()
 	}):start()
 end
 
-local function start_state_job()
+local function state_job()
 	Job:new({
 		command = "nowplaying-cli",
 		args = { "get", "playbackRate" },
@@ -49,13 +49,10 @@ local function start_state_job()
 				currently_playing = false
 			end
 		end,
-		on_exit = function()
-			start_state_job()
-		end,
 	}):start()
 end
 
-local function start_artist_job()
+local function artist_job()
 	Job:new({
 		command = "nowplaying-cli",
 		args = { "get", "artist" },
@@ -64,13 +61,10 @@ local function start_artist_job()
 				current_artist = data
 			end
 		end,
-		on_exit = function()
-			start_artist_job()
-		end,
 	}):start()
 end
 
-local function start_title_job()
+local function title_job()
 	Job:new({
 		command = "nowplaying-cli",
 		args = { "get", "title" },
@@ -80,30 +74,35 @@ local function start_title_job()
 				update_song_duration()
 			end
 		end,
-		on_exit = function()
-			start_title_job()
+	}):start()
+end
+
+local function time_job()
+	Job:new({
+		command = "nowplaying-cli",
+		args = { "get", "elapsedTime" },
+		on_stdout = function(j, data)
+			if data then
+				if currently_playing == false then
+					return
+				end
+
+				current_time = data
+			end
 		end,
 	}):start()
 end
 
-local function start_time_job()
+local function update_state()
 	local timer = vim.uv.new_timer()
 	timer:start(
 		0,
 		500,
 		vim.schedule_wrap(function()
-			Job:new({
-				command = "nowplaying-cli",
-				args = { "get", "elapsedTime" },
-				on_stdout = function(j, data)
-					if data then
-						if currently_playing == false then
-							return
-						end
-						current_time = data
-					end
-				end,
-			}):start()
+			state_job()
+			artist_job()
+			title_job()
+			time_job()
 		end)
 	)
 end
@@ -112,10 +111,8 @@ local function init_nowplaying()
 	if binary_installed == false then
 		return
 	end
-	start_state_job()
-	start_artist_job()
-	start_title_job()
-	start_time_job()
+
+	update_state()
 end
 
 local function verify_binary()
