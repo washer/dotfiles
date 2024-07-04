@@ -1,4 +1,5 @@
 local Job = require("plenary.job")
+local async = require("plenary.async")
 local math = require("math")
 local string = require("string")
 
@@ -7,6 +8,7 @@ local currently_playing = false
 local current_title = ""
 local current_artist = ""
 local current_time = 0
+local current_duration = 0
 
 local M = {}
 
@@ -24,6 +26,16 @@ local function get_playing_state_symbol()
 	else
 		return ""
 	end
+end
+
+local function update_song_duration()
+	Job:new({
+		command = "nowplaying-cli",
+		args = { "get", "duration" },
+		on_stdout = function(j, data)
+			current_duration = data
+		end,
+	}):start()
 end
 
 local function start_state_job()
@@ -65,6 +77,7 @@ local function start_title_job()
 		on_stdout = function(j, data)
 			if data and data ~= current_title then
 				current_title = data
+				update_song_duration()
 			end
 		end,
 		on_exit = function()
@@ -73,24 +86,26 @@ local function start_title_job()
 	}):start()
 end
 
--- TODO: It would be nicer if this could just run async once a second
 local function start_time_job()
-	Job:new({
-		command = "nowplaying-cli",
-		args = { "get", "elapsedTime" },
-		on_stdout = function(j, data)
-			if currently_playing == false then
-				return
-			end
-
-			if data then
-				current_time = data
-			end
-		end,
-		on_exit = function()
-			start_time_job()
-		end,
-	}):start()
+	local timer = vim.uv.new_timer()
+	timer:start(
+		0,
+		500,
+		vim.schedule_wrap(function()
+			Job:new({
+				command = "nowplaying-cli",
+				args = { "get", "elapsedTime" },
+				on_stdout = function(j, data)
+					if data then
+						if currently_playing == false then
+							return
+						end
+						current_time = data
+					end
+				end,
+			}):start()
+		end)
+	)
 end
 
 local function init_nowplaying()
@@ -120,6 +135,17 @@ end
 
 function M.getCurrentlyPlaying()
 	-- TODO: add check for what parts we have and make it nice if we only have title
+	--
+	if current_artist == "" then
+		return get_playing_state_symbol()
+			.. " "
+			.. current_title
+			.. " | "
+			.. disp_time(current_time)
+			.. "/"
+			.. disp_time(current_duration)
+	end
+
 	return get_playing_state_symbol()
 		.. " "
 		.. current_artist
@@ -127,6 +153,8 @@ function M.getCurrentlyPlaying()
 		.. current_title
 		.. " | "
 		.. disp_time(current_time)
+		.. "/"
+		.. disp_time(current_duration)
 end
 
 function M.nextSong()
