@@ -87,7 +87,12 @@ local function time_job()
 					return
 				end
 
-				current_time = data
+				local time = tonumber(data)
+				if time ~= nil and time > 2 and time < current_time then
+					return
+				end
+
+				current_time = time
 			end
 		end,
 	}):start()
@@ -131,16 +136,14 @@ local function verify_binary()
 end
 
 function M.getCurrentlyPlaying()
-	-- TODO: add check for what parts we have and make it nice if we only have title
-	--
+	-- This case is specifically for bandcamp
 	if current_artist == "" then
-		return get_playing_state_symbol()
-			.. " "
-			.. current_title
-			.. " | "
-			.. disp_time(current_time)
-			.. "/"
-			.. disp_time(current_duration)
+		local state_symbol = get_playing_state_symbol()
+		if string.sub(current_title, 1, 1) == state_symbol then
+			return current_title
+		else
+			return get_playing_state_symbol() .. " " .. current_title
+		end
 	end
 
 	return get_playing_state_symbol()

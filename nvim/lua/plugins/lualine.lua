@@ -40,7 +40,7 @@ return {
 							"progress",
 						},
 						lualine_z = {
-							nowplaying.getCurrentlyPlaying,
+							-- nowplaying.getCurrentlyPlaying,
 						},
 					},
 				})

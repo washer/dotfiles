@@ -7,8 +7,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.sql_type_default = "mysql"
 vim.g.use_custom_notifier = true
 
-require("mappings")
-
 -- Plugins
 vim.loader.enable() -- cache lua modules (https://github.com/neovim/neovim/pull/22668)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -95,3 +93,4 @@ require("config.lsp")
 require("config.dap")
 require("config.diagnostic")
 require("config.which-key")
+require("config.neotest")
