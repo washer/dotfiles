@@ -22,6 +22,22 @@ neotest.setup({
 		unknown = "?",
 		watching = "👀",
 	},
+	output_panel = {
+		open = "vs",
+		-- open = function()
+		-- 	local screen_w = vim.opt.columns:get()
+		-- 	vim.cmd("")
+		-- end,
+		-- close = function()
+		-- 	vim.cmd("FloatermToggle --name testoutput")
+		-- end,
+	},
+	output = {
+		enabled = true,
+	},
+	diagnostic = {
+		enabled = true,
+	},
 	adapters = {
 		require("neotest-jest")({
 			jestCommand = function(path)
@@ -49,7 +65,17 @@ neotest.setup({
 	},
 })
 
-map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "Run tests in file")
+-- map.leader("n", "tf", '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "Run tests in file")
+map.leader("n", "tf", function()
+	local buf = vim.fn.bufnr("Neotest Output Panel")
+	if buf ~= -1 then
+		-- require("neotest").output_panel.clear()
+		require("neotest").run.run(vim.fn.expand("%"))
+	else
+		require("neotest").output_panel.open()
+		require("neotest").run.run(vim.fn.expand("%"))
+	end
+end, "Run tests in file")
 map.leader("n", "tt", function()
 	-- Toggle trouble and test summary
 	require("trouble").toggle("diagnostics")

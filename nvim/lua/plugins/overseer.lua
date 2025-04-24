@@ -15,4 +15,5 @@ return {
 	map.leader("n", "rr", "<cmd>OverseerRun<CR>", "Overseer run"),
 	map.leader("n", "rt", "<cmd>OverseerOpen<CR>", "Overseer open"),
 	map.leader("n", "rb", "<cmd>OverseerBuild<CR>", "Overseer build"),
+	-- map.leader("n", "tc", "<cmd>over<CR>", "Overseer build"),
 }

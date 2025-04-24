@@ -33,13 +33,20 @@ return {
 			require("cyberdream").setup({
 				transparent = true,
 				italic_comments = true,
-				hide_fillchars = true,
 				borderless_telescope = false,
 				theme = {
 					highlights = {
-						-- Identifier = { fg = colors.red },
 						Identifier = { fg = colors.orange },
 					},
+				},
+				extensions = {
+					telescope = true,
+					notify = true,
+					cmp = true,
+					leap = true,
+					treesitter = true,
+					whichkey = true,
+					gitsigns = true,
 				},
 			})
 		end,

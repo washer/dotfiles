@@ -87,37 +87,6 @@ return {
 		},
 	},
 	{
-		"folke/zen-mode.nvim",
-		lazy = false,
-		opts = {
-			window = {
-				width = 180,
-			},
-		},
-	},
-	{
-		"xiyaowong/transparent.nvim",
-		lazy = false,
-		config = function()
-			require("transparent").setup({
-				extra_groups = {
-					"NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
-					"NvimTreeNormal", -- NvimTree
-				},
-			})
-		end,
-	},
-	"RRethy/vim-illuminate",
-	{
-		"ziontee113/icon-picker.nvim",
-		dependencies = {
-			"stevearc/dressing.nvim",
-		},
-		config = function()
-			require("icon-picker").setup({
-				disable_legacy_commands = true,
-			})
-		end,
-		map.leader("n", "]", "<cmd>IconPickerNormal<cr>", "Pick icon"),
+		"MunifTanjim/nui.nvim",
 	},
 }

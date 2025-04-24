@@ -1,5 +1,5 @@
 local git_blame = require("gitblame")
-local nowplaying = require("tools.nowplaying")
+-- local nowplaying = require("tools.nowplaying")
 
 local function executor()
 	return require("executor").statusline()
@@ -22,8 +22,7 @@ return {
 			config = function(_, opts)
 				local cyberdream = require("lualine.themes.cyberdream")
 				require("lualine").setup({
-					-- options = { theme = "auto", extensions = { "nvim-dap-ui" } },
-					options = { theme = "cyberdream", extensions = { "nvim-dap-ui" } },
+					options = { theme = "cyberdream", extensions = { "nvim-dap-ui" }, globalstatus = true },
 					sections = {
 						lualine_b = { repo, "branch", "diff", "diagnostics" },
 						lualine_c = {
@@ -35,12 +34,13 @@ return {
 								path = 1,
 							},
 						},
-						lualine_y = {
-							"filetype",
-							"progress",
-						},
+						lualine_y = {},
 						lualine_z = {
-							-- nowplaying.getCurrentlyPlaying,
+							{
+								require("noice").api.statusline.mode.get,
+								cond = require("noice").api.statusline.mode.has,
+								color = { fg = "#ff9e64" },
+							},
 						},
 					},
 				})

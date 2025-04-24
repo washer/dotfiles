@@ -10,7 +10,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		-- overrides `require("mason-lspconfig").setup(...)`
 		opts = {
-			ensure_installed = { "jsonls", "tsserver", "rust_analyzer", "sqlls" },
+			ensure_installed = { "jsonls", "ts_ls", "rust_analyzer", "sqlls", "clangd" },
 		},
 	},
 }
