@@ -48,9 +48,6 @@ map.leader("n", "fc", "<cmd>lua require('telescope.builtin').colorscheme()<cr>",
 map.leader("n", "fa", "<cmd>lua require('telescope').extensions.aerial.aerial()<cr>", "Aerial")
 map.leader("n", "ft", "<cmd>TodoTelescope<cr>", "Todos")
 
--- NvimTree
-map.leader("n", "e", "<cmd>NvimTreeFindFileToggle<cr>", "File tree")
-
 -- Comment
 map.leader(
 	"n",
@@ -66,3 +63,6 @@ map.leader("n", "pm", "<cmd>Mason<cr>")
 -- Nowplaying
 map.leader("n", "Ml", "<cmd>lua require('tools.nowplaying').nextSong()<cr>", "Next song")
 map.leader("n", "Mh", "<cmd>lua require('tools.nowplaying').previousSong()<cr>", "Previous song")
+
+-- namu
+map.leader("n", "n", "<cmd>Namu symbols<cr>", "Namu")

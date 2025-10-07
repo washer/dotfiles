@@ -30,6 +30,9 @@ return {
 				additional_vim_regex_highlighting = { "org" },
 			},
 			ensure_installed = {
+        "elixir",
+        "eex",
+        "heex",
 				"c",
 				"cpp",
 				"org",
@@ -48,7 +51,6 @@ return {
 				"lua",
 				"markdown",
 				"markdown_inline",
-				"elixirls",
 			},
 		},
 	},

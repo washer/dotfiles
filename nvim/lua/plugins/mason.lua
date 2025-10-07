@@ -1,6 +1,6 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		config = function(_, opts)
 			require("mason").setup(opts)
 		end,
@@ -10,7 +10,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		-- overrides `require("mason-lspconfig").setup(...)`
 		opts = {
-			ensure_installed = { "jsonls", "ts_ls", "rust_analyzer", "sqlls", "clangd" },
+			ensure_installed = { "jsonls", "ts_ls", "rust_analyzer", "sqlls", "clangd", "stylua" },
 		},
 	},
 }

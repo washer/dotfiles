@@ -1,81 +1,96 @@
 return {
 	{
-		"L3MON4D3/LuaSnip",
-		build = vim.fn.has("win32") == 0
-				and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
-			or nil,
-		dependencies = { "rafamadriz/friendly-snippets" },
+		"saghen/blink.cmp",
+		-- optional: provides snippets for the snippet source
+		dependencies = { "rafamadriz/friendly-snippets", "giuxtaposition/blink-cmp-copilot" },
+
+		-- use a release tag to download pre-built binaries
+		version = "1.*",
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
 		opts = {
-			history = true,
-			delete_check_events = "TextChanged",
-			region_check_events = "CursorMoved",
-		},
-		config = require("config.luasnip"),
-	},
-	{ "Gelio/cmp-natdat", config = true },
-	{
-		"hrsh7th/nvim-cmp",
-		commit = "a9c701fa7e12e9257b3162000e5288a75d280c28", -- https://github.com/hrsh7th/nvim-cmp/issues/1382
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"onsails/lspkind.nvim",
-			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-		},
-		event = "InsertEnter",
-		opts = function()
-			local cmp = require("cmp")
-			cmp.setup({
-				snippet = {
-					-- REQUIRED - you must specify a snippet engine
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = { preset = "enter" },
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = {
+				documentation = {
+					auto_show = true,
+				},
+				ghost_text = {
+					enabled = true,
+					show_with_menu = true,
+				},
+
+				menu = {
+					direction_priority = function()
+						local ctx = require("blink.cmp").get_context()
+						local item = require("blink.cmp").get_selected_item()
+						if ctx == nil or item == nil then
+							return { "s", "n" }
+						end
+
+						local item_text = item.textEdit ~= nil and item.textEdit.newText
+							or item.insertText
+							or item.label
+						local is_multi_line = item_text:find("\n") ~= nil
+
+						-- after showing the menu upwards, we want to maintain that direction
+
+						-- until we re-open the menu, so store the context id in a global variable
+						if is_multi_line or vim.g.blink_cmp_upwards_ctx_id == ctx.id then
+							vim.g.blink_cmp_upwards_ctx_id = ctx.id
+							return { "n", "s" }
+						end
+						return { "s", "n" }
 					end,
 				},
-				window = {
-					completion = {
-						border = "rounded",
-					},
-					documentation = cmp.config.window.bordered(),
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				}),
-				sources = cmp.config.sources({
-					{ name = "copilot" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
-					{ name = "buffer" },
-					{ name = "natdat" },
-				}),
-				-- experimental = {
-				-- 	ghost_text = true,
-				-- },
-			})
-			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
+			},
 
-			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
-		end,
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { "lsp", "copilot", "path", "snippets", "buffer" },
+				providers = {
+					copilot = {
+						name = "copilot",
+						module = "blink-cmp-copilot",
+						score_offset = 100,
+						async = true,
+					},
+				},
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+			signature = { enabled = true },
+		},
+		opts_extend = { "sources.default" },
 	},
 }

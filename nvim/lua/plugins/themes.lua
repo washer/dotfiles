@@ -42,7 +42,7 @@ return {
 				extensions = {
 					telescope = true,
 					notify = true,
-					cmp = true,
+					-- cmp = true,
 					leap = true,
 					treesitter = true,
 					whichkey = true,
