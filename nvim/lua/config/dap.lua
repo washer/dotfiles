@@ -1,7 +1,9 @@
 local map = require("config.map")
 local dap = require("dap")
 local dap_widgets = require("dap.ui.widgets")
+local utils = require("dap.utils")
 local dapui = require("dapui")
+local vscode_js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/vscode-js-debug/js-debug-adapter"
 
 dapui.setup({})
 
@@ -16,6 +18,28 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 			skipFiles = { "node_modules/**" },
 			console = "integratedTerminal",
 			cwd = "${workspaceFolder}",
+		},
+		{
+			type = "pwa-node",
+			request = "attach",
+			name = "Attach to process ID",
+			processId = utils.pick_process,
+			cwd = "${workspaceFolder}",
+		},
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Debug Jest Tests",
+			-- trace = true, -- include debugger info
+			runtimeExecutable = "node",
+			runtimeArgs = {
+				"./node_modules/jest/bin/jest.js",
+				"--runInBand",
+			},
+			rootPath = "${workspaceFolder}",
+			cwd = "${workspaceFolder}",
+			console = "integratedTerminal",
+			internalConsoleOptions = "neverOpen",
 		},
 	}
 end
@@ -32,11 +56,15 @@ map.leader("n", "dt", '<cmd>lua require("dapui").toggle()<cr>', "Toggle UI")
 dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 dap.listeners.before.event_exited["dapui_config"] = dapui.close
-
-require("dap-vscode-js").setup({
-	debugger_path = vim.fn.expand("~/vscode-js-debug"),
-	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-	log_file_path = "(stdpath cache)/dap_vscode_js.log",
-	log_file_level = false,
-	log_console_level = vim.log.levels.ERROR,
-})
+dap.adapters["pwa-node"] = {
+	type = "server",
+	host = "localhost",
+	port = "${port}",
+	executable = {
+		command = "node",
+		args = {
+			vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+			"${port}",
+		},
+	},
+}
