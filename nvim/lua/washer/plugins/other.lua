@@ -1,5 +1,3 @@
-local map = require("config.map")
-
 return {
 	{
 		"rgroli/other.nvim",
@@ -84,7 +82,7 @@ return {
 				},
 			})
 
-			map.leader("n", "fo", ":Other<CR>", "Other Files")
+			vim.keymap.set("n", "<leader>fo", ":Other<CR>")
 		end,
 	},
 }

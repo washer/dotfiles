@@ -1,5 +1,3 @@
-local map = require("config.map")
-
 return {
 	{
 		"stevearc/oil.nvim",
@@ -10,7 +8,7 @@ return {
 				view_options = { show_hidden = true },
 			})
 
-			map.leader("n", "F", "<cmd>Oil --float<cr>", "Oil")
+			vim.keymap.set("n", "<leader>F", "<cmd>Oil --float<cr>")
 		end,
 	},
 }
