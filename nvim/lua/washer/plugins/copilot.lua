@@ -7,7 +7,7 @@ return {
 			require("copilot").setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
-				copilot_model = "GPT-5.2",
+				copilot_model = "gpt-41-copilot",
 			})
 		end,
 	},
