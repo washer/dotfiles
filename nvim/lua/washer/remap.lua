@@ -43,14 +43,5 @@ end)
 -- undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
--- Comment
-vim.keymap.set(
-	"n",
-	"<leader>/",
-	"<cmd>lua require('Comment.api').toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)<cr>"
-)
-
-vim.keymap.set("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>")
-
 -- Mason
 vim.keymap.set("n", "<leader>pm", "<cmd>Mason<cr>")

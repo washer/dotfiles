@@ -8,7 +8,7 @@ return {
 		config = function()
 			require("everforest").setup({
 				-- Your config here
-				transparent_background_level = 2,
+				transparent_background_level = 1,
 			})
 		end,
 	},

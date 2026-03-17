@@ -28,8 +28,16 @@ return {
 								"filename",
 								path = 1,
 							},
+							"location",
 						},
-						lualine_y = {},
+						lualine_y = {
+							"lsp_status",
+							{
+								function()
+									return " " .. os.date("%c")
+								end,
+							},
+						},
 						lualine_z = {
 							{
 								require("noice").api.statusline.mode.get,
