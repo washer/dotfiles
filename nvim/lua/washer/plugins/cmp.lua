@@ -1,5 +1,8 @@
 return {
 	{
+		"xzbdmw/colorful-menu.nvim",
+	},
+	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		dependencies = { "rafamadriz/friendly-snippets", "giuxtaposition/blink-cmp-copilot" },
@@ -32,12 +35,14 @@ return {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
 				nerd_font_variant = "mono",
+				use_nvim_cmp_as_default = false,
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
 			completion = {
 				documentation = {
 					auto_show = true,
+					window = { border = "rounded" },
 				},
 				ghost_text = {
 					enabled = true,
@@ -45,6 +50,15 @@ return {
 				},
 
 				menu = {
+					border = "rounded",
+					cmdline_position = function()
+						if vim.g.ui_cmdline_pos ~= nil then
+							local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
+							return { pos[1] - 1, pos[2] }
+						end
+						local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
+						return { vim.o.lines - height, 0 }
+					end,
 					direction_priority = function()
 						local ctx = require("blink.cmp").get_context()
 						local item = require("blink.cmp").get_selected_item()
@@ -66,13 +80,28 @@ return {
 						end
 						return { "s", "n" }
 					end,
+					draw = {
+						-- We don't need label_description now because label and label_description are already
+						-- combined together in label by colorful-menu.nvim.
+						columns = { { "kind_icon" }, { "label", gap = 1 } },
+						components = {
+							label = {
+								text = function(ctx)
+									return require("colorful-menu").blink_components_text(ctx)
+								end,
+								highlight = function(ctx)
+									return require("colorful-menu").blink_components_highlight(ctx)
+								end,
+							},
+						},
+					},
 				},
 			},
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "copilot", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "copilot", "snippets", "buffer" },
 				providers = {
 					copilot = {
 						name = "copilot",
@@ -89,7 +118,10 @@ return {
 			--
 			-- See the fuzzy documentation for more information
 			fuzzy = { implementation = "prefer_rust_with_warning" },
-			signature = { enabled = true },
+			signature = {
+				enabled = true,
+				window = { border = "rounded" },
+			},
 		},
 		opts_extend = { "sources.default" },
 	},
